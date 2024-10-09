@@ -30,7 +30,7 @@ ADCDACPi::ADCDACPi(){
 	adctx[0] = 0x01; // transmit buffer for the ADC
 	adctx[1] = 0x80;
 	adctx[2] = 0x00;
-	
+
 	adcrefvoltage = 3.3; // reference voltage for the ADC chip.
 	dacgain = 1; // gain setting for the DAC chip.
 	dacvoltage = 2.048; // maximum voltage for the DAC output
@@ -97,7 +97,7 @@ double ADCDACPi::read_adc_voltage(int channel, int mode) {
 	* When in differential mode setting channel to 2 will make IN1 = IN- and IN2 = IN+
 	* @returns between 0V and the reference voltage
 	*/
-	
+
 	int rawval = read_adc_raw(channel, mode);
 	return ((adcrefvoltage / 4096) * (double) rawval);
 }
@@ -113,7 +113,7 @@ int ADCDACPi::read_adc_raw(int channel, int mode) {
 	* When in differential mode setting channel to 2 will make IN1 = IN- and IN2 = IN+
 	* @returns 12 bit value between 0 and 4096
 	*/
-	
+
 	if (channel == 1) {
 		if (mode == 0) {
 			adctx[1] = 0x80;
@@ -137,11 +137,11 @@ int ADCDACPi::read_adc_raw(int channel, int mode) {
 	struct spi_ioc_transfer spi;
 	memset(&spi,0,sizeof(spi));
 
-	spi.tx_buf = (unsigned long)adctx;	
+	spi.tx_buf = (unsigned long)adctx;
 	spi.rx_buf = (unsigned long)adcrx;
 	spi.len = 3;
 	spi.speed_hz = 1800000; // 1.8MHz Clock Speed
-	spi.delay_usecs = 0;		
+	spi.delay_usecs = 0;
 	spi.bits_per_word = 8;
 
 
@@ -167,7 +167,7 @@ void ADCDACPi::set_dac_voltage(double voltage, int channel) {
 	*/
 	if (channel < 1 && channel > 2) {
 		throw std::out_of_range("set_dac_voltage channel out of range: 1 or 2");
-	} 		
+	}
 
 	if ((voltage >= 0.0) && (voltage < dacvoltage)) {
 		uint16_t rawval = ((voltage / 2.048) * 4096) / dacgain;
@@ -183,7 +183,7 @@ void ADCDACPi::set_dac_raw(uint16_t raw, int channel) {
 	* @param raw - between 0 and 4095
 	* @param channel - 1 or 2
 	*/
-	
+
 	dactx[1] = (raw & 0xff);
 	dactx[0] = (((raw >> 8) & 0xff) | (channel - 1) << 7 | 0x1 << 5 | 1 << 4);
 
@@ -201,14 +201,14 @@ void ADCDACPi::set_dac_raw(uint16_t raw, int channel) {
 	tr.rx_buf = (unsigned long)NULL;
 	tr.len = 2;
 	tr.speed_hz = 20000000; // 20MHz clock speed
-	tr.delay_usecs = 0;		
+	tr.delay_usecs = 0;
 	tr.bits_per_word = 8;
 	tr.cs_change = 0;
 
 	// Write data
 	ioctl(dac, SPI_IOC_MESSAGE(1), &tr);
 	return;
-		
+
 }
 
 
@@ -216,7 +216,7 @@ void ADCDACPi::set_dac_raw(uint16_t raw, int channel) {
 void ADCDACPi::set_dac_gain(int gain) {
 	/**
 	* Set the DAC gain
-	* @param gain - 1 or 2 - The output voltage will be between 0 and 2.048V when gain is set to 1,  0 and 3.3V when gain is set to 2	
+	* @param gain - 1 or 2 - The output voltage will be between 0 and 2.048V when gain is set to 1,  0 and 3.3V when gain is set to 2
 	*/
 	if (gain == 1) {
 		dacgain = 1;

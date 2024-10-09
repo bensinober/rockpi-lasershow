@@ -1,6 +1,6 @@
 #pragma once
 
-class Points {  
+class Points {
     public:
         Points();
         bool next();
