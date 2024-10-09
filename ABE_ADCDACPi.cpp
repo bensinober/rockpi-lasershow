@@ -16,8 +16,10 @@ Version 1.0 Created 23/06/2017
 #include <linux/spi/spidev.h>
 #include "ABE_ADCDACPi.h"
 
-#define adcdevice "/dev/spidev0.0"
-#define dacdevice "/dev/spidev0.1"
+//#define adcdevice "/dev/spidev0.0"
+//#define dacdevice "/dev/spidev0.1"
+#define adcdevice "/dev/spidev1.1"
+#define dacdevice "/dev/spidev1.0"
 
 using namespace ABElectronics_CPP_Libraries;
 
