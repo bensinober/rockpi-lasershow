@@ -1,7 +1,7 @@
 // Format spec: https://www.ilda.com/resources/StandardsDocs/ILDA_IDTF14_rev011.pdf
 
 class FrameData {
-    
+
     public:
         FrameData();
 

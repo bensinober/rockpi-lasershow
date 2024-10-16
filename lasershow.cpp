@@ -59,12 +59,14 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    ADCDACPi adcdac;
+    ADCDACPi adc_dac;
 
     // Open the DAC SPI channel.
-    if (adcdac.open_dac() != 1) return(1);
+    if (adc_dac.open_dac() != 1) {
+        return(1);
+    }
     // Set the DAC gain to 1 which will give a voltage range of 0 to 2.048V.
-    adcdac.set_dac_gain(1);
+    adc_dac.set_dac_gain(1);
 
     // Setup ILDA reader.
     Points points;
@@ -86,11 +88,13 @@ int main(int argc, char **argv) {
     while(true) {
 
         // Exit if no points found.
-        if (points.size == 0) break;
+        if (points.size == 0) {
+            break;
+        }
 
         // Move galvos to x,y position. (4096 is to invert horizontally)
-        adcdac.set_dac_raw(4096-points.store[points.index*3],1);
-        adcdac.set_dac_raw(points.store[(points.index*3)+1],2);
+        adc_dac.set_dac_raw(points.store[points.index*3],1);
+        adc_dac.set_dac_raw(4096-points.store[(points.index*3)+1],2);
 
         // Turn on/off laser diode.
         if (points.store[(points.index*3)+2] == 1) {
@@ -110,7 +114,9 @@ int main(int argc, char **argv) {
         }
 
         // Maybe wait a while there.
-        if (pointDelay > 0) usleep(pointDelay);
+        if (pointDelay > 0) {
+            usleep(pointDelay);
+        }
 
         // In case there's no more points in the current frame check if it's time to load next frame.
         if (!points.next()) {
@@ -125,7 +131,7 @@ int main(int argc, char **argv) {
 
     // Cleanup and exit.
     ildaReader.closeFile();
-    adcdac.close_dac();
+    adc_dac.close_dac();
     return (0);
 }
 
