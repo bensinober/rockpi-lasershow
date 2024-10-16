@@ -63,7 +63,7 @@ The code is using SPI for communication with DAC and one GPIO for laser diode:
 
 ![Fazer top view](https://raw.githubusercontent.com/bensinober/rockpi-lasershow/master/docs/fazer_top.jpg)
 
-![Fazer DAC](https://raw.githubusercontent.com/bensinober/rockpi-lasershow/master/docs/dac.jpg)
+![Fazer DAC](https://raw.githubusercontent.com/bensinober/rockpi-lasershow/master/docs/fazer_dac.jpg)
 
 ## Op-amp
 
