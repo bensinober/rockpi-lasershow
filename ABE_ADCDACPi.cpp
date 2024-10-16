@@ -16,18 +16,17 @@ See CHANGELOG.md for the version number.
 #include <linux/spi/spidev.h>
 #include "ABE_ADCDACPi.h"
 
-//#define adcdevice "/dev/spidev0.0"
-//#define dacdevice "/dev/spidev0.1"
-#define adcdevice "/dev/spidev1.1"
-#define dacdevice "/dev/spidev1.0"
-
+//#define adc_device "/dev/spidev0.0"
+//#define dac_device "/dev/spidev0.1"
+#define adc_device "/dev/spidev1.1"
+#define dac_device "/dev/spidev1.0"
 using namespace ABElectronics_CPP_Libraries;
 
-
-
 ADCDACPi::ADCDACPi(){
-	mode = SPI_MODE_0; // SPI_MODE_0
-	speed = 2500000; // SPI bus speed
+	spi_mode = SPI_MODE_0; // SPI_MODE_0
+	adcspeed = 1100000; // SPI ADC bus speed 1.1MHz
+	//dacspeed = 20000000; // SPI DAC bus speed 20MHz
+	dacspeed = 2500000; // SPI DAC bus speed 2.5MHz
 
 	adctx[0] = 0x01; // transmit buffer for the ADC
 	adctx[1] = 0x80;
