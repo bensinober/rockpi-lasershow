@@ -5,7 +5,9 @@ Thanks so much for this great effort on porting to plain c++!. It is again based
 https://www.instructables.com/id/Arduino-Laser-Show-With-Real-Galvos/ . It is modified for use on a Rock Pi 4SE, should work on any of these.
 It also uses gpiod for laser instead of the deprecated WiringPi.
 
-![Screenshot](https://raw.githubusercontent.com/tteskac/rpi-lasershow/master/laserpi.jpg)
+![Front Fazer](https://raw.githubusercontent.com/bensinober/rockpi-lasershow/master/docs/fazer_front.jpg)
+
+![Projected Fazer](https://raw.githubusercontent.com/bensinober/rockpi-lasershow/master/docs/fazer_logo_project.jpg)
 
 ## Software
 - Written in C++ for Raspberry Pi / Rock Pi (all versions should work).
@@ -57,7 +59,11 @@ The code is using SPI for communication with DAC and one GPIO for laser diode:
 \-----------------------------------------/
 ```
 
-![DAC](https://raw.githubusercontent.com/bensinober/rpi-lasershow/master/mcp48x2.png)
+![DAC](https://raw.githubusercontent.com/bensinober/rock-lasershow/master/mcp48x2.png)
+
+![Fazer top view](https://raw.githubusercontent.com/bensinober/rockpi-lasershow/master/docs/fazer_top.jpg)
+
+![Fazer DAC](https://raw.githubusercontent.com/bensinober/rockpi-lasershow/master/docs/dac.jpg)
 
 ## Op-amp
 
