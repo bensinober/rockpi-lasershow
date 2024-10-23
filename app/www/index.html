@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAZER Laser painting</title>
+    <link href="https://fonts.cdnfonts.com/css/blade-runner-movie-font" rel="stylesheet">
+    <style>
+        *    { overflow: hidden; padding: 5px; }
+        body { text-align: center; }
+        canvas {
+            border: 10px solid black;
+            box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.2);
+        }
+        #drawSvg {
+            border: 10px solid black;
+            box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.2);
+            touch-action: none; /* neccessary not for BOTH pointer and touch triggering at same time */
+        }
+        .btn {
+          appearance: none;
+          background-color: transparent;
+          border: 5px solid #1A1A1A;
+          border-radius: 20px;
+          box-sizing: border-box;
+          color: #3B3B3B;
+          cursor: pointer;
+          font-size: 18px;
+          line-height: normal;
+          min-height: 60px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          width: 80%;
+          will-change: transform;
+        }
+
+        .btn:disabled {
+          pointer-events: none;
+        }
+
+        .btn:hover {
+          color: #fff;
+          background-color: #1A1A1A;
+          box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+          transform: translateY(-2px);
+        }
+
+        .btn:active {
+          box-shadow: none;
+          transform: translateY(0);
+        }
+        .container { display: flex; justify-content: space-evenly; }
+        .column { display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; }
+        .title { font-family: "Blade Runner Movie Font", sans-serif; text-align: center; height: 3rem; font-size: 32px;}
+        #captureName { font-size: 18px; }
+    </style>
+
+    <!-- button interactions/event listeners goes here -->
+    <script type="module" id="main">
+        import { randomName, capture, startDraw, stopDraw, draw, reset, sendToFazer } from "./script.js"
+        import { connectToEyes } from "./eyes.js"
+
+        window.addEventListener("load", () => {
+            const name = randomName().toLowerCase()
+            document.querySelector("#captureName").innerText = name
+            const drawSvg = document.querySelector("#drawSvg")
+            drawSvg.addEventListener("mousedown", startDraw)
+            drawSvg.addEventListener("mouseup", stopDraw)
+            drawSvg.addEventListener("mousemove", draw)
+            drawSvg.addEventListener("pointerdown", startDraw)
+            drawSvg.addEventListener("pointerup", stopDraw)
+            drawSvg.addEventListener("pointermove", draw)
+            //drawSvg.addEventListener("pointercancel", stopDraw)
+        })
+
+
+        document.getElementById("resetBtn").addEventListener("click", reset)
+        document.getElementById("eyesBtn").addEventListener("click", connectToEyes)
+        document.getElementById("captureBtn").addEventListener("click", capture)
+        document.getElementById("sendToFazerBtn").addEventListener("click", sendToFazer)
+    </script>
+
+</head>
+
+<body>
+    <div class="title">fazer - live laser paint!</div>
+    <div id="captureName">captureName</div>
+    <div class="container">
+        <div class="column">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="drawSvg" x="0px" y="0px" width="500px" height="500px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
+            <div class="title">draw</div>
+        </div>
+        <div class="column">
+            <button id="resetBtn" class="btn">new</button>
+            <button id="captureBtn" class="btn">capture</button>
+            <button id="sendToFazerBtn" class="btn">send to fazer</button>
+            <button id="eyesBtn" class="btn">eyes</button>
+        </div>
+        <div class="column">
+            <canvas id="renderCanvas" width="500" height="500"></canvas>
+            <div class="title">result</div>
+        </div>
+    </div>
+    <div id="svgDiv"></div>
+</body>
+</html>
