@@ -139,7 +139,7 @@ class PathBezier3(object):
 		c1y = (1.0/3) * cy + (2.0/3) * sy
 		c2x = (1.0/3) * cx + (2.0/3) * ex
 		c2y = (1.0/3) * cy + (2.0/3) * ey
-		return PathBezier4(self.start, (c1x,c1y), (c2x,c2y), self.end).render()
+		return PathBezier4(self.start, (c1x,c1y), (c2x,c2y), self.end).render(params)
 	def reverse(self):
 		return PathBezier3(self.end, self.cp, self.start)
 	def scp(self):

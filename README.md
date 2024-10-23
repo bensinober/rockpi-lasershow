@@ -31,14 +31,25 @@ See RockPI.md for further installation instructions on Rock PI. I had much troub
 
 [Rock Pi 4 pinout](https://wiki.radxa.com/Rock4/hardware/gpio)
 
-## Installation
+## Lasershow Installation
+
 1) Clone this project
-2) Run ```make``` to build executable
+2) Run ```make``` to build c++ executable
 3) Start with ```./lasershow 0 ilda-files/test.ild``` (0 means delay after every point in microseconds)
 4) Have fun!
 
 Btw#2, this project currently supports only ILDA type 1, so make sure you export correct version.
 
+## Drawing webapp
+
+
+1) install bunjs
+
+    sudo apt-get install zip
+    curl -fsSL https://bun.sh/install | bash
+
+2) bun install
+3) point browser to localhost:8664/index and draw
 
 ## Wiring
 The code is using SPI for communication with DAC and one GPIO for laser diode:
