@@ -1,4 +1,4 @@
-import { ImageTracer } from "./imagetracer_v1.2.6.js"
+//import { ImageTracer } from "./imagetracer_v1.2.6.js"
 import { writeToEyes, eyesConnected } from "./eyes.js"
 import { ILDA } from "./ilda.js"
 import { loadIldaDataToCanvas, startLaser, stopLaser } from "./renderLaser.js"

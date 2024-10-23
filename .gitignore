@@ -1,2 +1,7 @@
 lasershow
 .vscode/
+node_modules
+app/*.pem
+app/*.lockb
+app/www/ilda/*
+app/www/images/*
